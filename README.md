@@ -1,9 +1,8 @@
 # cs6475
 Computational Photography.
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-** Assignment #2: Image I/O and Python Setup. **
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+**Assignment #2: Image I/O and Python Setup.
+---------------------------------
 1) part1 install:Python + Numpy + Scipy + OpenCV
    Ubuntu install:
 sudo apt-get update
