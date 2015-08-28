@@ -4,10 +4,10 @@ Computational Photography.
 **Assignment #2: Image I/O and Python Setup.
 ---------------------------------
 1) part1 install:Python + Numpy + Scipy + OpenCV
-   Ubuntu install:
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install python-numpy python-scipy python-opencv
+*Ubuntu install: 
+- sudo apt-get update 
+- sudo apt-get upgrade 
+- sudo apt-get install python-numpy python-scipy python-opencv
 
 2) part2: Assignment deliverable
 The following files in a folder labeled assignment2:
