@@ -1,6 +1,5 @@
 # ASSIGNMENT 2
-# Your Name
-# GTID
+# Amy Tran
 
 import cv2
 import numpy as np
@@ -43,8 +42,8 @@ def numberOfPixels(image):
         int: The number of pixels in an image.
     """
     # WRITE YOUR CODE HERE.
-
-
+    # image is grayscale,can caculate pixel by x*y (rows* columns)
+    return image.size
 
     # END OF FUNCTION.
 
@@ -65,9 +64,7 @@ def averagePixel(image):
         int: The average pixel in the image (Range of 0-255).
     """
     # WRITE YOUR CODE HERE.
-
-
-
+    return int(np.sum(image) / numberOfPixels(image))
     # END OF FUNCTION.
 
 def convertToBlackAndWhite(image):
@@ -88,8 +85,17 @@ def convertToBlackAndWhite(image):
         numpy.ndarray: The black and white image.
     """
     # WRITE YOUR CODE HERE.
+    #Return a new array of given shape and type, filled with zeros
+    Black_White_Image = np.zeros(image.shape, dtype=np.uint8)
+    # Multidimensional index iterator.
+    for index, value in np.ndenumerate(image):
+        # value > 128, set white=255, else set 0= black
+        if value > 128:
+            Black_White_Image[index] = 255  #white
+        else:
+            Black_White_Image[index] = 0  #black
 
-
+    return Black_White_Image
 
     # END OF FUNCTION.
 
@@ -112,9 +118,12 @@ def averageTwoImages(image1, image2):
 
     """
     # WRITE YOUR CODE HERE.
+    #Assume 2 image are the same size
+    AvgImages = np.zeros(image1.shape, dtype=np.uint8)
+    for index, value in np.ndenumerate(image1):
+        AvgImages[index] = image1[index] / 2 + image2[index] / 2
 
-
-
+    return AvgImages
     # END OF FUNCTION.
 
 def flipHorizontal(image):
@@ -134,7 +143,56 @@ def flipHorizontal(image):
 
     """
     # WRITE YOUR CODE HERE.
+    FlipImage = np.zeros(image.shape, dtype=np.uint8)
+    for col in range(image.shape[1]):
+        FlipImage[:,col] = image[:,image.shape[1]-col-1]
 
-
-
+    return FlipImage
     # END OF FUNCTION.
+
+#Main test codes
+if False: ''' Comment out my test code
+if __name__ == "__main__":
+    image1 = cv2.imread("amy_test_image1.jpg", cv2.IMREAD_GRAYSCALE)
+    # Writeback black and white pciture
+    cv2.imwrite('amy_image1_BW.jpg', image1)
+    image2 = cv2.imread("amy_test_image2.jpg",cv2.IMREAD_GRAYSCALE)
+    # 1) print pixel from grayscale images
+    print "\n=>(1)numberOfPixels: image1  "
+    print numberOfPixels(image1)
+    print "\n---print image1.shape to test:--"
+    print image1.shape
+    print "\n=>**(1)numberOfPixels: image2  "
+    print numberOfPixels(image2)
+    print "\n---print image2.shape to test:--"
+    print image2.shape
+
+    # 2) print average pixel from grayscale images
+    print "\n=>(2)averagePixel: image1  "
+    print averagePixel(image1)
+    print "\n=>**(2)averagePixel: image2  "
+    print averagePixel(image2)
+    print "\n---use another method to test by print np.average:--"
+    print np.average(image1)
+
+    #3)call converToBlackAndWhite and store that output
+    print "\n=>(3)convertToBlackAndWhite...  "
+    bwImage1= convertToBlackAndWhite (image1)
+    print "\n+++Write the Black and White image... please wait!  "
+    cv2.imwrite('amy_image1_convertBW.jpg', bwImage1)
+
+    #4) The averageTwoImages function
+    print "\n=>(4)averageTwoImages(image1,image2) "
+    average = averageTwoImages(image1, image2)
+    print "\n++++Write the averageTwoImage ... please wait!  "
+    cv2.imwrite("amy_average.jpg", average)
+
+     #5) Now, flip the image horizontal
+    print "\n=>(5)flipHorizontal-----  "
+    imageFlip = flipHorizontal(image1)
+    print "\n+++Write the flipHorizontal() image ... please wait!  "
+    cv2.imwrite('amy_test_image1_flip.jpg', imageFlip)
+'''
+
+
+
