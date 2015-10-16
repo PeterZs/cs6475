@@ -1,5 +1,6 @@
 # ASSIGNMENT 6
-# Your Name
+# Ngoc(Amy) Tran
+# GTID:903094708 
 
 import numpy as np
 import scipy as sp
@@ -64,9 +65,12 @@ def reduce(image):
 
   """
   # WRITE YOUR CODE HERE.
-
-
-
+  output = None;
+  kernel = generatingKernel(0.4)
+  output = scipy.signal.convolve2d(image, kernel, 'same')
+  # reduce image by 1/2
+  output = output[:output.shape[0]:2, :output.shape[1]:2] 
+  return output
 
   # END OF FUNCTION.
 
@@ -96,8 +100,15 @@ def expand(image):
     output (numpy.ndarray): an image of shape (2*r, 2*c)
   """
   # WRITE YOUR CODE HERE.
-
-
+  output = None;
+  kernel = generatingKernel(0.4)
+  #Double image size
+  image_expand = np.zeros((image.shape[0]*2, image.shape[1]*2), dtype=np.float64)
+  #Assign every other row/col
+  image_expand[:image_expand.shape[0]:2, :image_expand.shape[1]:2] = image[:,:] 
+  #Multiply by 4 output
+  output = 4 * scipy.signal.convolve2d(image_expand,kernel,'same')
+  return output
 
   # END OF FUNCTION.
 
@@ -127,8 +138,13 @@ def gaussPyramid(image, levels):
   """
   output = [image]
   # WRITE YOUR CODE HERE.
-
-
+  temp = image
+  
+  #Loop for each of the levels
+  for i in range(0,levels):
+    temp =  reduce (temp)
+    output.append(temp)
+   
   return output
   # END OF FUNCTION.
 
@@ -164,11 +180,20 @@ def laplPyramid(gaussPyr):
   """
   output = []
   # WRITE YOUR CODE HERE.
-
-
-
+  gaussPyr_len = len(gaussPyr)
+  for i in range(0,gaussPyr_len-1):
+    gauss = gaussPyr[i]
+    expanded_gu = expand (gaussPyr[i+1])
+    if expanded_gu.shape[0] > gauss.shape[0]:
+       expanded_gu = np.delete(expanded_gu,(-1),axis=0)
+    if expanded_gu.shape[1] > gauss.shape[1]:
+      expanded_gu = np.delete(expanded_gu,(-1),axis=1)
+    output.append(gauss - expanded_gu)
+  output.append(gaussPyr.pop())
   return output
+
   # END OF FUNCTION.
+
 
 def blend(laplPyrWhite, laplPyrBlack, gaussPyrMask):
   """ Blend the two Laplacian pyramids by weighting them according to the
@@ -206,10 +231,13 @@ def blend(laplPyrWhite, laplPyrBlack, gaussPyrMask):
 
   blended_pyr = []
   # WRITE YOUR CODE HERE.
+  for laplWhite, laplBlack, gaussMask in zip(laplPyrWhite, laplPyrBlack, gaussPyrMask):
+    blended_pyr.append(gaussMask * laplWhite + (1 - gaussMask) * laplBlack)
 
 
   return blended_pyr
   # END OF FUNCTION.
+
 
 def collapse(pyramid):
   """ Collapse an input pyramid.
@@ -235,7 +263,17 @@ def collapse(pyramid):
   6x8. If the next layer is of size 5x7, crop the expanded image to size 5x7.
   """
   # WRITE YOUR CODE HERE.
+  output = pyramid[-1]
 
+  #iterate in reverse
+  for image in reversed(pyramid[:-1]):
+    #Expand current sum, making sure to have the layer sizes agree
+    output = image + expand(output)[:image.shape[0], :image.shape[1]] 
 
+  return output
+
+ 
 
   # END OF FUNCTION.
+
+
