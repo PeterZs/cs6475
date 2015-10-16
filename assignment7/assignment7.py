@@ -1,5 +1,5 @@
 # ASSIGNMENT 7
-# Your Name
+# Ngoc(Amy) Tran
 
 import numpy as np
 import scipy as sp
@@ -86,9 +86,27 @@ def findMatchesBetweenImages(image_1, image_2):
 
   # WRITE YOUR CODE HERE.
 
+  #Initial SIFT detector
+  #sift = cv2.SIFT()
+  #  Got error "object has no attribute 'SIFT'"
+  # use ORB since my cv2 verion '2.4.8'has no SIFT!
+  orb = cv2.ORB()
 
+  # find the keypoints and descriptors with SIFT
+  image_1_kp, image_1_desc = orb.detectAndCompute(image_1,None)
+  image_2_kp, image_2_desc = orb.detectAndCompute(image_2,None)
 
+  # create BFMatcher object
+  bfMacth =  cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
+  # Match descriptors.
+  matches = bfMacth.match(image_1_desc, image_2_desc)
+
+  # Sort the matches based on distances
+  matches = sorted(matches, key = lambda x:x.distance)
+
+  # return the top 10 matches in a list
+  matches = matches[:10]
 
   # We coded the return statement for you. You are free to modify it -- just
   # make sure the tests pass.
