@@ -1,5 +1,6 @@
 # ASSIGNMENT 2
-# Amy Tran
+# Ngoc(Amy) Tran
+
 
 import cv2
 import numpy as np
