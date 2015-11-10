@@ -1,5 +1,5 @@
 # ASSIGNMENT 4
-# Your Name
+# Ngoc(Amy) Tran
 
 import cv2
 import numpy as np
@@ -52,10 +52,17 @@ def imageGradientX(image):
                                 one less than the original since no calculation
                                 can be done once the last column is reached. 
     """
+
     # WRITE YOUR CODE HERE.
+    gradientX = np.zeros((image.shape[0], image.shape[1]-1), dtype= np.float)
 
+    for row in range (gradientX.shape[0]):
+        for col in range (gradientX.shape[1]):
+             gradientX[row,col] = abs( np.float(image[row,col+1]) - image[row,col] )
 
+    gradientX = gradientX.astype (np.float)
 
+    return gradientX
     # END OF FUNCTION.
 
 def imageGradientY(image):
@@ -83,9 +90,19 @@ def imageGradientY(image):
                                 one less than the original since no calculation
                                 can be done once the last row is reached.
     """
+
     # WRITE YOUR CODE HERE.
+    #image = image.astype(np.int32)
+    #shape = image.shape
+    gradientY = np.zeros((image.shape[0]-1, image.shape[1]),dtype= np.float)
 
+    for row in range (gradientY.shape[0]):
+        for col in range (gradientY.shape[1]):
+             gradientY[row,col] = abs( np.float(image[row+1,col]) - image[row,col] )
 
+    gradientY = gradientY.astype (np.float)
+
+    return gradientY
 
     # END OF FUNCTION.
 
@@ -116,10 +133,37 @@ def computeGradient(image, kernel):
                                 size of the output array should be two rows and
                                 two columns smaller than the original image
                                 size.
-    """                            
+    """
+
     # WRITE YOUR CODE HERE.
+    assert kernel.shape[0] % 2 == 1, "Assume kernel 3x3 matrix! Must have odd number of rows"
+    assert kernel.shape[1] % 2 == 1, "Assume kernel 3x3 matrix! must have odd number of columns"
 
+    result = np.zeros((image.shape[0]-2, image.shape[1]-2), dtype= np.float)
 
+    for row in range( 1, image.shape[0]-2 ):
+        for col in range ( 1, image.shape[1]-2 ):
+            image_correlation = image[ row-1:row+2, col-1:col+2 ]
+            #result[row-1, col-1] = abs(np.sum( image_correlation * kernel))
+            result[row-1, col-1] = abs(np.sum( np.multiply(image_correlation, kernel), axis=(0,1) ))
+
+    result = result.astype (np.float)
+
+    return result
 
     # END OF FUNCTION.
-    
+
+
+def convertToBlackAndWhite(image, threshold):
+
+    #Return a new array of given shape and type, filled with zeros
+    Black_White_Image = np.zeros(image.shape, dtype=np.uint8)
+    # Multidimensional index iterator.
+    for index, value in np.ndenumerate(image):
+        # value > threshold, set white=255, else set 0= black
+        if value > threshold:
+            Black_White_Image[index] = 255  #white
+        else:
+            Black_White_Image[index] = 0  #black
+
+    return Black_White_Image
