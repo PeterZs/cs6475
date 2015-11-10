@@ -1,6 +1,5 @@
 # ASSIGNMENT 6
 # Ngoc(Amy) Tran
-# GTID:903094708 
 
 import numpy as np
 import scipy as sp
