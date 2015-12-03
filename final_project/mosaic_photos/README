@@ -1,0 +1,26 @@
+1) resize the image to square
+----------------------------
+ * put the input image to resize at
+  --------------------------
+   ./source/input
+
+  *create output of resize image at
+  -------------------------------
+   ./source/output
+
+   *execute resize image
+   ------------------------
+   python resize_images.py 
+
+
+2) Create mosaic photo
+--------------------------
+ *put the photo you want to create mosaic in "mosaic_photos" directory
+  --------------------------------------------------------------------
+  example: put file image.jpg in this folder
+
+ *Put "tiles" foler into this "mosaic_photos" directory
+---------------------------------------------------
+ + max 50 photos in the tiles folder
+
+

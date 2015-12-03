@@ -1,0 +1,15 @@
+To run:
+------
+1) put all the photos that want to convert to cartoon into source/input
+2) create output image folder at source/output
+3) run command:
+python cartoonify_photos_test.py 
+
+
+
+ref:
+https://stacks.stanford.edu/file/druid:yt916dh6570/Dade_Toonify.pdf
+http://people.csail.mit.edu/sparis/bf_course/
+http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_tutorials.html
+http://stanford.edu/~cpiech/cs221/handouts/kmeans.html
+http://glowingpython.blogspot.com/2012/04/k-means-clustering-with-scipy.html

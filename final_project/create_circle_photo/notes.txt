@@ -1,0 +1,16 @@
+1) Turns images into clusters of circler
+-------------------------------------
+
+python create_cirle_photo.py --circimg images/county_small_boat.jpg --outimg outputs/county_small_boat.jpg --log
+python create_cirle_photo.py --circimg images/monet-starry.jpg --outimg outputs/monet-starry.jpg --log
+
+2) few modify to turn to different circle  image
+---------------------------------------------
+python create_cirle_photo.py --circimg images/monet-starry.jpg --outimg outputs/monet-starry_flags.jpg --bgimg images/monet-starry.jpg --bgcolour 0 --log --nooutline
+
+python create_cirle_photo.py --circimg images/amy_at_sweden.jpg --outimg outputs/amy_at_sweden_flags.jpg --bgimg images/amy_at_sweden.jpg --bgcolour 0 --log --nooutline
+
+
+3)And another example, with a different background colouring, and scaling
+-------------------------------------------------------------------- 
+python create_cirle_photo.py --circimg images/amy_avatar.jpg --outimg outputs/amy_avatar_colout.jpg.jpg --log --bgimg images/america.jpeg --scale 2
