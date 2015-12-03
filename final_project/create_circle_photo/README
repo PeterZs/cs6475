@@ -1,0 +1,32 @@
+
+* To create the circle photo image
+----------------------------------
+
+1) Copy photos to folder "images"
+2) The output, will be store in the "outputs" folder
+mkdir outputs
+
+*commands :
+-----------
+
+a) Turns images into clusters of circler
+--------------------------------------
++ take input image "images/county_small_boat.jpg"
++ and ouput image save in output/county_small_boat.jpg
+
+python create_cirle_photo.py --circimg images/county_small_boat.jpg --outimg outputs/county_small_boat.jpg --log
+
+b) few more options to turn to different circle  image
+-------------------------------------------------------
+python create_cirle_photo.py --circimg images/monet-starry.jpg --outimg outputs/monet-starry_flags.jpg --bgimg images/monet-starry.jpg --bgcolour 0 --log --nooutline
+
+
+c)Another options, with a different background colouring, and scaling
+-------------------------------------------------------------------- 
+python create_cirle_photo.py --circimg images/amy_avatar.jpg --outimg outputs/amy_avatar_colout.jpg.jpg --log --bgimg images/america.jpeg --scale 2
+
+
+
+
+
+
