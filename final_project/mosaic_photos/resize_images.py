@@ -2,7 +2,6 @@
 # Ngoc (Amy) Tran
 
 
-
 """ Final Project - This is the Utility to resize images
 
 The mosaic_photos will take the photos input as square!
