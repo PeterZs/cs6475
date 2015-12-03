@@ -8,19 +8,37 @@
   -------------------------------
    ./source/output
 
-   *execute resize image
-   ------------------------
+
+   *execute resize image (hardcode to resize size: 500x500)
+   -----------------------------------------------
    python resize_images.py 
 
 
 2) Create mosaic photo
 --------------------------
- *put the photo you want to create mosaic in "mosaic_photos" directory
-  --------------------------------------------------------------------
-  example: put file image.jpg in this folder
+using:
+python mosaic_photo <image> <tiles directory>
 
- *Put "tiles" foler into this "mosaic_photos" directory
----------------------------------------------------
- + max 50 photos in the tiles folder
+
+*put the photo you want to create mosaic in "mosaic_photos" directory
+--------------------------------------------------------------------
+I have my photo "Amy_in_paris.jpg" that I want to create mosaic image
+
+*I use tiles directory as  directory "./source/output" that just resize.
+------------------------------------------------------------
+=> To create Mosaic photo run
+
+#python mosaic_photos.py Amy_in_paris.jpg ./source/output
+
+=> The mosaic image save as file name "mosaic_photo_final.jpg"
+
+@##output log
+Reading tiles from './source/output'...
+Processed 98 tiles.
+Processing main image...
+Main image processed.
+Building mosaic, press Ctrl-C to abort...
+Progress: 98% 
+Finished, output is in mosaic_photo_final.jpg
 
 
